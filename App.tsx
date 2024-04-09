@@ -5,9 +5,12 @@
  * @format
  */
 
+import i18n from 'i18n/i18n';
 import React from 'react';
 import type {PropsWithChildren} from 'react';
+import {useTranslation} from 'react-i18next';
 import {
+  Button,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -23,6 +26,7 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import {locales} from 'utils/static';
 import tw from 'utils/tailwind';
 
 type SectionProps = PropsWithChildren<{
@@ -57,6 +61,7 @@ function Section({children, title}: SectionProps): React.JSX.Element {
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
+  const {t} = useTranslation();
 
   const backgroundColor = isDarkMode ? Colors.darker : Colors.lighter;
 
@@ -79,11 +84,19 @@ function App(): React.JSX.Element {
           style={tw.style(`bg-[${Colors.white}]`, {
             [`bg-[${Colors.black}]`]: isDarkMode,
           })}>
-          <Section title="Step One">
+          <Button
+            title="Indonesia"
+            onPress={() => i18n.changeLanguage(locales.ID)}
+          />
+          <Button
+            title="English"
+            onPress={() => i18n.changeLanguage(locales.EN)}
+          />
+          <Section title={t('step_one')}>
             Edit <Text style={tw`font-bold`}>App.tsx</Text> to change this
             screen and then come back to see your edits.
           </Section>
-          <Section title="See Your Changes">
+          <Section title={t('see_your_changes')}>
             <ReloadInstructions />
           </Section>
           <Section title="Debug">
