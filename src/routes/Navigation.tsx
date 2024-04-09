@@ -23,7 +23,8 @@ const Navigation = () => {
         />
         <Screen
           name={ROUTES.Home}
-          getComponent={() => require('screens/Home').default}
+          options={{headerShown: false}}
+          getComponent={() => require('routes/DrawerNavigation').default}
         />
       </Navigator>
     </NavigationContainer>
